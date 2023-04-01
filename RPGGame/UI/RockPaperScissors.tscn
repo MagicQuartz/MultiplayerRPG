@@ -1,0 +1,204 @@
+[gd_scene load_steps=13 format=2]
+
+[ext_resource path="res://Assets/Fonts/DeterminationMonoWebRegular.ttf" type="DynamicFontData" id=1]
+[ext_resource path="res://UI/Theme.tres" type="Theme" id=2]
+[ext_resource path="res://Scripts/RockPaperScissors.cs" type="Script" id=3]
+[ext_resource path="res://Assets/Images/paper.png" type="Texture" id=4]
+[ext_resource path="res://Assets/Images/rock.png" type="Texture" id=5]
+[ext_resource path="res://Assets/Images/scissors.png" type="Texture" id=6]
+[ext_resource path="res://Assets/Images/x.png" type="Texture" id=7]
+[ext_resource path="res://Scripts/ThreeDots.cs" type="Script" id=8]
+[ext_resource path="res://Assets/Sounds/SFX/win.wav" type="AudioStream" id=9]
+[ext_resource path="res://Assets/Sounds/SFX/not_so_win.wav" type="AudioStream" id=10]
+[ext_resource path="res://Assets/Sounds/SFX/uh_win.wav" type="AudioStream" id=11]
+
+[sub_resource type="DynamicFont" id=8]
+extra_spacing_char = -1
+font_data = ExtResource( 1 )
+
+[node name="RockPaperScissors" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource( 3 )
+
+[node name="Waiting" type="Panel" parent="."]
+visible = false
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -126.0
+margin_top = -26.0
+margin_right = 126.0
+margin_bottom = 26.0
+
+[node name="Text" type="Label" parent="Waiting"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -120.5
+margin_top = -8.5
+margin_right = 120.5
+margin_bottom = 8.5
+theme = ExtResource( 2 )
+custom_fonts/font = SubResource( 8 )
+text = "Waiting for opponent..."
+align = 1
+autowrap = true
+script = ExtResource( 8 )
+prefix = "Waiting for opponent"
+
+[node name="Cancel" type="TextureButton" parent="Waiting"]
+anchor_top = 0.5
+anchor_bottom = 0.5
+margin_left = 2.0
+margin_top = -24.0
+margin_right = 11.0
+margin_bottom = -15.0
+texture_normal = ExtResource( 7 )
+expand = true
+stretch_mode = 5
+
+[node name="WinLose" type="Panel" parent="."]
+visible = false
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -126.0
+margin_top = -26.0
+margin_right = 126.0
+margin_bottom = 26.0
+
+[node name="Text" type="Label" parent="WinLose"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -120.5
+margin_top = -8.5
+margin_right = 120.5
+margin_bottom = 8.5
+theme = ExtResource( 2 )
+custom_fonts/font = SubResource( 8 )
+text = "You won!"
+align = 1
+autowrap = true
+script = ExtResource( 8 )
+
+[node name="WinStreamPlayer" type="AudioStreamPlayer" parent="WinLose"]
+stream = ExtResource( 9 )
+
+[node name="LoseStreamPlayer" type="AudioStreamPlayer" parent="WinLose"]
+stream = ExtResource( 10 )
+
+[node name="TieStreamPlayer" type="AudioStreamPlayer" parent="WinLose"]
+stream = ExtResource( 11 )
+
+[node name="Battle" type="Panel" parent="."]
+visible = false
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -130.0
+margin_top = -63.0
+margin_right = 130.0
+margin_bottom = 63.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Challenger" type="Label" parent="Battle"]
+anchor_left = 0.5
+anchor_right = 0.5
+margin_left = -120.5
+margin_top = 10.0
+margin_right = 120.5
+margin_bottom = 27.0
+theme = ExtResource( 2 )
+custom_fonts/font = SubResource( 8 )
+text = "Opponent: Username"
+align = 1
+autowrap = true
+
+[node name="Rock" type="TextureButton" parent="Battle"]
+anchor_top = 0.5
+anchor_bottom = 0.5
+margin_left = 25.0
+margin_top = -23.0
+margin_right = 90.0
+margin_bottom = 47.0
+texture_normal = ExtResource( 5 )
+expand = true
+stretch_mode = 5
+
+[node name="Paper" type="TextureButton" parent="Battle"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -32.5
+margin_top = -23.0
+margin_right = 32.5
+margin_bottom = 47.0
+texture_normal = ExtResource( 4 )
+expand = true
+stretch_mode = 5
+
+[node name="Scissors" type="TextureButton" parent="Battle"]
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+margin_left = -90.0
+margin_top = -23.0
+margin_right = -25.0
+margin_bottom = 47.0
+texture_normal = ExtResource( 6 )
+expand = true
+stretch_mode = 5
+
+[node name="Cancel" type="TextureButton" parent="Battle"]
+anchor_top = 0.5
+anchor_bottom = 0.5
+margin_left = 1.0
+margin_top = -62.0
+margin_right = 10.0
+margin_bottom = -53.0
+texture_normal = ExtResource( 7 )
+expand = true
+stretch_mode = 5
+
+[node name="Canceled" type="Panel" parent="."]
+visible = false
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -126.0
+margin_top = -26.0
+margin_right = 126.0
+margin_bottom = 26.0
+
+[node name="Text" type="Label" parent="Canceled"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -120.5
+margin_top = -8.5
+margin_right = 120.5
+margin_bottom = 8.5
+theme = ExtResource( 2 )
+custom_fonts/font = SubResource( 8 )
+text = "Opponent canceled!"
+align = 1
+autowrap = true
+
+[connection signal="pressed" from="Waiting/Cancel" to="." method="_CancelPressed"]
+[connection signal="pressed" from="Battle/Rock" to="." method="_RockPressed"]
+[connection signal="pressed" from="Battle/Paper" to="." method="_PaperPressed"]
+[connection signal="pressed" from="Battle/Scissors" to="." method="_ScissorsPressed"]
+[connection signal="pressed" from="Battle/Cancel" to="." method="_CancelPressed"]
