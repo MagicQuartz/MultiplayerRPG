@@ -1,0 +1,107 @@
+[gd_scene load_steps=21 format=2]
+
+[ext_resource path="res://Assets/Animations/Player/walk_left.tres" type="Animation" id=1]
+[ext_resource path="res://Scripts/Player.cs" type="Script" id=2]
+[ext_resource path="res://Assets/Animations/Player/walk_down.tres" type="Animation" id=3]
+[ext_resource path="res://Assets/Animations/Player/walk_up.tres" type="Animation" id=4]
+[ext_resource path="res://Assets/Animations/Player/idle_up.tres" type="Animation" id=5]
+[ext_resource path="res://Assets/Animations/Player/idle_right.tres" type="Animation" id=6]
+[ext_resource path="res://Assets/Animations/Player/walk_right.tres" type="Animation" id=7]
+[ext_resource path="res://Assets/Animations/Player/idle_left.tres" type="Animation" id=8]
+[ext_resource path="res://Assets/Animations/Player/idle_down.tres" type="Animation" id=9]
+[ext_resource path="res://Assets/Spritesheets/Sprout Lands - Sprites - Basic pack/Characters/Basic Charakter Spritesheet.png" type="Texture" id=10]
+[ext_resource path="res://UI/Menu.tscn" type="PackedScene" id=11]
+[ext_resource path="res://Assets/Fonts/DeterminationMonoWebRegular.ttf" type="DynamicFontData" id=12]
+[ext_resource path="res://UI/Dialogue.tscn" type="PackedScene" id=13]
+[ext_resource path="res://UI/Chat.tscn" type="PackedScene" id=14]
+[ext_resource path="res://UI/RPSpropose.tscn" type="PackedScene" id=15]
+[ext_resource path="res://UI/Key.tscn" type="PackedScene" id=16]
+[ext_resource path="res://UI/RockPaperScissors.tscn" type="PackedScene" id=17]
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 6, 2.28125 )
+
+[sub_resource type="DynamicFont" id=2]
+outline_size = 2
+outline_color = Color( 0, 0, 0, 0.552941 )
+font_data = ExtResource( 12 )
+
+[sub_resource type="CircleShape2D" id=3]
+radius = 33.6815
+
+[node name="Player" type="KinematicBody2D"]
+scale = Vector2( 3, 3 )
+script = ExtResource( 2 )
+
+[node name="Sprite" type="Sprite" parent="."]
+texture = ExtResource( 10 )
+hframes = 4
+vframes = 4
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+anims/idle_down = ExtResource( 9 )
+anims/idle_left = ExtResource( 8 )
+anims/idle_right = ExtResource( 6 )
+anims/idle_up = ExtResource( 5 )
+anims/walk_down = ExtResource( 3 )
+anims/walk_left = ExtResource( 1 )
+anims/walk_right = ExtResource( 7 )
+anims/walk_up = ExtResource( 4 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
+position = Vector2( 0, 5.65625 )
+shape = SubResource( 1 )
+
+[node name="Camera2D" type="Camera2D" parent="."]
+smoothing_enabled = true
+smoothing_speed = 4.0
+
+[node name="CanvasLayer" type="CanvasLayer" parent="Camera2D"]
+
+[node name="Menu" parent="Camera2D/CanvasLayer" instance=ExtResource( 11 )]
+visible = false
+
+[node name="Dialogue" parent="Camera2D/CanvasLayer" instance=ExtResource( 13 )]
+visible = false
+
+[node name="Chat" parent="Camera2D/CanvasLayer" instance=ExtResource( 14 )]
+
+[node name="RockPaperScissors" parent="Camera2D/CanvasLayer" instance=ExtResource( 17 )]
+
+[node name="RPSpropose" parent="Camera2D/CanvasLayer" instance=ExtResource( 15 )]
+visible = false
+
+[node name="RPSKey" parent="Camera2D/CanvasLayer" instance=ExtResource( 16 )]
+visible = false
+margin_left = 617.0
+margin_top = 335.0
+margin_right = 617.0
+margin_bottom = 335.0
+
+[node name="Username" type="Label" parent="Camera2D"]
+visible = false
+anchor_left = -0.144
+anchor_top = -0.114
+anchor_right = 0.144
+anchor_bottom = -0.067
+margin_left = -42.0
+margin_top = -18.6667
+margin_right = 125.0
+margin_bottom = -1.66667
+rect_scale = Vector2( 0.5, 0.5 )
+custom_fonts/font = SubResource( 2 )
+text = "Username"
+align = 1
+valign = 1
+
+[node name="Area2D2" type="Area2D" parent="."]
+monitorable = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D2"]
+shape = SubResource( 3 )
+
+[connection signal="body_entered" from="Area2D2" to="." method="_BodyEntered"]
+[connection signal="body_exited" from="Area2D2" to="." method="_BodyExited"]
+
+[editable path="Camera2D/CanvasLayer/RockPaperScissors"]
