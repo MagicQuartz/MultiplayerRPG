@@ -1,0 +1,14 @@
+{
+	"MagicQuartz": {
+		"PosX": 609.886169,
+		"PosY": -48.582001,
+		"Balance": 250,
+		"Sprite": 0
+	},
+	"Godzilla": {
+		"PosX": 499.468445,
+		"PosY": 13.309248,
+		"Balance": 250,
+		"Sprite": 0
+	}
+}
